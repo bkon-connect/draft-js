@@ -248,6 +248,13 @@ var DraftEntity:DraftEntityMapObject = {
     invariant(!!instance, 'Unknown DraftEntity key.');
     return instance;
   },
+  
+  /**
+   * Retrieve all entity instances as a Map
+   */
+  __getAll: function(key: string): DraftEntityInstance {
+    return instances;
+  },
 
   /**
    * Entity instances are immutable. If you need to update the data for an

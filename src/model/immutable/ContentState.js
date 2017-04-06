@@ -175,6 +175,11 @@ class ContentState extends ContentStateRecord {
     // TODO: update this when we fully remove DraftEntity
     return DraftEntity.__get(key);
   }
+  
+  getEntities(): Map {
+    // TODO: update this when we fully remove DraftEntity
+    return DraftEntity.__getAll();
+  }
 
   static createFromBlockArray(
     // TODO: update flow type when we completely deprecate the old entity API
