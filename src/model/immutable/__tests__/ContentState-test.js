@@ -102,8 +102,8 @@ describe('ContentState', () => {
       jest.resetModuleRegistry();
     });
 
-    function createLink() {
-      return contentState.createEntity('LINK', 'MUTABLE', {uri: 'zombo.com'});
+    function createLink(uri = 'zombo.com') {
+      return contentState.createEntity('LINK', 'MUTABLE', {uri});
     }
 
     it('must create instances', () => {

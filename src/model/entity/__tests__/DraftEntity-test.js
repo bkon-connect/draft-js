@@ -13,6 +13,7 @@
 
 jest.disableAutomock();
 
+var Immutable = require('immutable');
 var DraftEntity = require('DraftEntity');
 
 describe('DraftEntity', () => {
@@ -20,8 +21,8 @@ describe('DraftEntity', () => {
     jest.resetModuleRegistry();
   });
 
-  function createLink() {
-    return DraftEntity.__create('LINK', 'MUTABLE', {uri: 'zombo.com'});
+  function createLink(uri = 'zombo.com') {
+    return DraftEntity.__create('LINK', 'MUTABLE', {uri});
   }
 
   it('must create instances', () => {
@@ -35,6 +36,15 @@ describe('DraftEntity', () => {
     expect(retrieved.getType()).toBe('LINK');
     expect(retrieved.getMutability()).toBe('MUTABLE');
     expect(retrieved.getData()).toEqual({uri: 'zombo.com'});
+  });
+  
+  it('must retrieve all instances', () => {
+    var key1 = createLink();
+    var key2 = createLink('rombo.net');
+    var retrievedMap = DraftEntity.__getAll();
+    expect(retrievedMap instanceof Immutable.Map).toBe(true);
+    expect(retrievedMap.get(key1).getData()).toEqual({uri: 'zombo.com'});
+    expect(retrievedMap.get(key2).getData()).toEqual({uri: 'rombo.net'});
   });
 
   it('must throw when retrieving for an invalid key', () => {
